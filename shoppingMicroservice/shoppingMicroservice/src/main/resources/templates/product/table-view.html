@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:include="commoncss :: commoncss">
+    <title>Product List </title>
+</head>
+<body>
+<div class="main-content">
+    <div class="container">
+<a th:href="@{/product/add}" class="btn btn-success"
+>  Create
+</a>
+<table class="table">
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Qty</td>
+        <td>price</td>
+        <td>more</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product: ${products}">
+        <td th:text="${product.productName}" />
+        <td th:text="${product.productQty}" />
+        <td th:text="${product.productPrice}" />
+        <td>
+            <a class="btn btn-warning" th:href="@{/product/find-by-id/}+${product.id}">  Update</a>
+            <a class="btn btn-danger" th:href="@{/product/delete/}+${product.id}">  Delete</a>
+        </td>
+    </tr>
+    <tr  th:if="${#lists.isEmpty(products)}">
+<td colspan="5">
+    Can not find available Products
+</td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+</div>
+<div th:include="commonjs :: commonjs"></div>
+
+</body>
+</html>
